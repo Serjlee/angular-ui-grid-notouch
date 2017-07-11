@@ -1269,8 +1269,8 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService, $documen
 
               $scope.offAllEvents();
               if ( event.type === 'touchstart'){
-                $document.on('touchend', $scope.upFn);
-                $document.on('touchmove', $scope.moveFn);
+                //$document.on('touchend', $scope.upFn);
+                //$document.on('touchmove', $scope.moveFn);
               } else if ( event.type === 'mousedown' ){
                 $document.on('mouseup', $scope.upFn);
                 $document.on('mousemove', $scope.moveFn);
@@ -1315,13 +1315,13 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService, $documen
 
 
             $scope.offAllEvents = function(){
-              $contentsElm.off('touchstart', $scope.downFn);
+              //$contentsElm.off('touchstart', $scope.downFn);
               $contentsElm.off('mousedown', $scope.downFn);
 
-              $document.off('touchend', $scope.upFn);
+              //$document.off('touchend', $scope.upFn);
               $document.off('mouseup', $scope.upFn);
 
-              $document.off('touchmove', $scope.moveFn);
+              //$document.off('touchmove', $scope.moveFn);
               $document.off('mousemove', $scope.moveFn);
 
               $contentsElm.off('click', $scope.clickFn);
@@ -1337,7 +1337,7 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService, $documen
                 case 'touchmove':
                 case 'touchend':
                   $contentsElm.on('click', $scope.clickFn);
-                  $contentsElm.on('touchstart', $scope.downFn);
+                  //$contentsElm.on('touchstart', $scope.downFn);
                   $timeout(function(){
                     $contentsElm.on('mousedown', $scope.downFn);
                   }, changeModeTimeout);
@@ -1346,13 +1346,13 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService, $documen
                 case 'mouseup':
                   $contentsElm.on('click', $scope.clickFn);
                   $contentsElm.on('mousedown', $scope.downFn);
-                  $timeout(function(){
+                  /*$timeout(function(){
                     $contentsElm.on('touchstart', $scope.downFn);
-                  }, changeModeTimeout);
+                  }, changeModeTimeout);*/
                   break;
                 default:
                   $contentsElm.on('click', $scope.clickFn);
-                  $contentsElm.on('touchstart', $scope.downFn);
+                  //$contentsElm.on('touchstart', $scope.downFn);
                   $contentsElm.on('mousedown', $scope.downFn);
               }
             };
@@ -16787,7 +16787,7 @@ module.filter('px', function() {
               $elm.on('dblclick', beginEdit);
 
               // Add touchstart handling. If the users starts a touch and it doesn't end after X milliseconds, then start the edit
-              $elm.on('touchstart', touchStart);
+              //$elm.on('touchstart', touchStart);
 
               if (uiGridCtrl && uiGridCtrl.grid.api.cellNav) {
 
@@ -16820,6 +16820,7 @@ module.filter('px', function() {
             }
 
             function touchStart(event) {
+              /*
               // jQuery masks events
               if (typeof(event.originalEvent) !== 'undefined' && event.originalEvent !== undefined) {
                 event = event.originalEvent;
@@ -16839,18 +16840,19 @@ module.filter('px', function() {
                 // Undbind the touchend handler, we don't need it anymore
                 $elm.off('touchend', touchEnd);
               });
+              */
             }
 
             // Cancel any touchstart timeout
             function touchEnd(event) {
-              $timeout.cancel(cancelTouchstartTimeout);
-              $elm.off('touchend', touchEnd);
+              /*$timeout.cancel(cancelTouchstartTimeout);
+              $elm.off('touchend', touchEnd);*/
             }
 
             function cancelBeginEditEvents() {
               $elm.off('dblclick', beginEdit);
               $elm.off('keydown', beginEditKeyDown);
-              $elm.off('touchstart', touchStart);
+              //$elm.off('touchstart', touchStart);
               cellNavNavigateDereg();
               viewPortKeyDownDereg();
               $scope.beginEditEventsWired = false;
@@ -22511,8 +22513,8 @@ module.filter('px', function() {
                     $document.on('mousemove', moveFn);
                     $document.on('mouseup', upFn);
                   } else if ( event.type === 'touchstart' ){
-                    $document.on('touchmove', moveFn);
-                    $document.on('touchend', upFn);
+                    //$document.on('touchmove', moveFn);
+                    //$document.on('touchend', upFn);
                   }
                 };
 
@@ -22650,19 +22652,19 @@ module.filter('px', function() {
                 };
 
                 var onDownEvents = function(){
-                  $contentsElm.on('touchstart', downFn);
+                  //$contentsElm.on('touchstart', downFn);
                   $contentsElm.on('mousedown', downFn);
                 };
 
                 var offAllEvents = function() {
-                  $contentsElm.off('touchstart', downFn);
+                  //$contentsElm.off('touchstart', downFn);
                   $contentsElm.off('mousedown', downFn);
 
                   $document.off('mousemove', moveFn);
-                  $document.off('touchmove', moveFn);
+                  //$document.off('touchmove', moveFn);
 
                   $document.off('mouseup', upFn);
-                  $document.off('touchend', upFn);
+                  //$document.off('touchend', upFn);
                 };
 
                 onDownEvents();
@@ -23952,28 +23954,28 @@ module.filter('px', function() {
           // down event - so if we're touchdown, then remove the mousedown handler until this event is over, if we're
           // mousedown then remove the touchdown handler until this event is over, this avoids processing duplicate events
           if ( event.type === 'touchstart' ){
-            $document.on('touchend', upFunction);
-            $document.on('touchmove', moveFunction);
+            //$document.on('touchend', upFunction);
+            //$document.on('touchmove', moveFunction);
             $elm.off('mousedown', downFunction);
           } else {
             $document.on('mouseup', upFunction);
             $document.on('mousemove', moveFunction);
-            $elm.off('touchstart', downFunction);
+            //$elm.off('touchstart', downFunction);
           }
         };
 
         var onDownEvents = function() {
           $elm.on('mousedown', downFunction);
-          $elm.on('touchstart', downFunction);
+          //$elm.on('touchstart', downFunction);
         };
 
         var offAllEvents = function() {
           $document.off('mouseup', upFunction);
-          $document.off('touchend', upFunction);
+         // $document.off('touchend', upFunction);
           $document.off('mousemove', moveFunction);
-          $document.off('touchmove', moveFunction);
+          //$document.off('touchmove', moveFunction);
           $elm.off('mousedown', downFunction);
-          $elm.off('touchstart', downFunction);
+          //$elm.off('touchstart', downFunction);
         };
 
         onDownEvents();
@@ -26461,7 +26463,7 @@ module.filter('px', function() {
               }
 
               // if we get a click, then stop listening for touchend
-              $elm.off('touchend', touchEnd);
+              //$elm.off('touchend', touchEnd);
 
               if (evt.shiftKey) {
                 uiGridSelectionService.shiftSelect($scope.grid, $scope.row, evt, $scope.grid.options.multiSelect);
@@ -26477,7 +26479,7 @@ module.filter('px', function() {
               // don't re-enable the touchend handler for a little while - some devices generate both, and it will
               // take a little while to move your hand from the mouse to the screen if you have both modes of input
               $timeout(function () {
-                $elm.on('touchend', touchEnd);
+                //$elm.on('touchend', touchEnd);
               }, touchTimeout);
             };
 
@@ -26507,8 +26509,8 @@ module.filter('px', function() {
             function registerRowSelectionEvents() {
               if ($scope.grid.options.enableRowSelection && $scope.grid.options.enableFullRowSelection) {
                 $elm.addClass('ui-grid-disable-selection');
-                $elm.on('touchstart', touchStart);
-                $elm.on('touchend', touchEnd);
+                //$elm.on('touchstart', touchStart);
+                //$elm.on('touchend', touchEnd);
                 $elm.on('click', selectCells);
 
                 $scope.registered = true;
@@ -26519,8 +26521,8 @@ module.filter('px', function() {
               if ($scope.registered) {
                 $elm.removeClass('ui-grid-disable-selection');
 
-                $elm.off('touchstart', touchStart);
-                $elm.off('touchend', touchEnd);
+                //$elm.off('touchstart', touchStart);
+                //$elm.off('touchend', touchEnd);
                 $elm.off('click', selectCells);
 
                 $scope.registered = false;
